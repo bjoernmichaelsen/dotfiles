@@ -4,31 +4,42 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-# Replace the '❯' symbol in the prompt with '➜'
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
-
 format = """
 [░▒▓](#a3aed2)\
-[  ](bg:#a3aed2 fg:#090c0c)\
+$os$username\
 [](bg:#769ff0 fg:#a3aed2)\
 $directory\
 [](fg:#769ff0 bg:#394260)\
 $git_branch\
 $git_status\
+$git_state\
 [](fg:#394260 bg:#212736)\
 $nodejs\
 $rust\
 $golang\
-$php\
+$gradle\
+$python\
+$terraform\
+$package\
 [](fg:#212736 bg:#1d2230)\
 $time\
 [ ](fg:#1d2230)\
+$cmd_duration\
 \n$character"""
+
+[os]
+style = "bg:#a3aed2 fg:#090c0c"
+disabled = false
+
+[os.symbols]
+Debian = "  "
+Ubuntu = "  "
+Gentoo = " 󰣨 "
+
+[username]
+style_user = "bg:#a3aed2 fg:#090c0c"
+format = "[$user]($style)"
+show_always = true
 
 [directory]
 style = "fg:#e3e5e5 bg:#769ff0"
@@ -48,8 +59,12 @@ style = "bg:#394260"
 format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 
 [git_status]
-style = "bg:#394260"
+style = "fg:#769ff0 bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+
+[git_state]
+style = "fg:#769ff0 bg:#394260"
+format = '\([$state ($progress_current/$progress_total)]($style)\)'
 
 [nodejs]
 symbol = ""
@@ -66,8 +81,23 @@ symbol = ""
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
-[php]
-symbol = ""
+[gradle]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[python]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[terraform]
+symbol = "󱁢"
+style = "bg:#212736"
+format = '[[ $symbol ($version$workspace) ](fg:#769ff0 bg:#212736)]($style)'
+
+[package]
+symbol = "󰏖"
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
@@ -76,3 +106,11 @@ disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+
+# Disable the package module, hiding it from the prompt completely
+#[package]
+#disabled = true
