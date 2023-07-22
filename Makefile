@@ -2,7 +2,15 @@ NERDFONTS_BASEURL=https://github.com/ryanoasis/nerd-fonts/releases/download/
 NERDFONTS_VERSION=v3.0.2
 NERDFONTS_NAMES=3270 Hack Monoid
 
-all: nerdfonts-install
+all: nerdfonts-install nushell-install starship-install carapace-install
+
+carapace-install: carapace-build
+	cp workdir/carapace ~/.local/bin/
+	carapace _carapace nushell > ~/.config/nushell/carapace.nu
+
+carapace-build:
+	podman build --tag $@ $@
+	podman run --mount type=bind,source=workdir/,destination=/out $@ cp carapace-bin/cmd/carapace/carapace /out
 
 starship-install: starship-build
 	cp workdir/starship ~/.local/bin/
@@ -35,4 +43,4 @@ workdir:
 clean:
 	rm -rf workdir
 
-.PHONY: all nerdfonts-dl nerdfonts-install nushell-build nushell-install starship-install starship-build clean
+.PHONY: all nerdfonts-dl nerdfonts-install nushell-build nushell-install starship-install starship-build carapace-install carapace-build clean
