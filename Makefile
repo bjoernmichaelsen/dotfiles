@@ -5,13 +5,17 @@ NERDFONTS_NAMES:=3270 Hack Monoid
 # rust is mostly statically linked, but you want a Debian or Ubuntu base image with the same glibc of your target machine.
 RUST_BASE_IMAGE:=debian:bookworm
 
-STARSHIP_REPO_URL:=https://github.com/nushell/nushell
-STARSHIP_TAG:=0.82.2
-STARSHIP_BUILD_DEPS:=build-essential openssl pkg-config libssl-dev
+NUSHELL_REPO_URL:=https://github.com/nushell/nushell
+NUSHELL_TAG:=0.82.0
+NUSHELL_BUILD_DEPS:=build-essential openssl pkg-config libssl-dev
 
 STARSHIP_REPO_URL:=https://github.com/starship/starship
 STARSHIP_TAG:=v1.15.0
 STARSHIP_BUILD_DEPS:=build-essential cmake
+
+CARAPACE_REPO_URL:=https://github.com/rsteube/carapace-bin.git
+CARAPACE_TAG:=v0.25.1
+CARAPACE_BUILD_DEPS:=
 
 SHELL=sh
 
@@ -51,7 +55,11 @@ $1-build:
 .PHONY: $1-build
 endef
 
-$(eval $(call container-build, carapace, carapace-bin/cmd/carapace/carapace))
+$(eval $(call container-build, carapace,\
+	$(CARAPACE_TAG),\
+	$(CARAPACE_REPO_URL),\
+	$(CARAPACE_BUILD_DEPS),\
+	build/cmd/carapace/carapace))
 $(eval $(call container-build, starship,\
 	$(STARSHIP_TAG),\
 	$(STARSHIP_REPO_URL),\
