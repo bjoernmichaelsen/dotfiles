@@ -552,5 +552,6 @@ let-env config = {
   ]
 }
 alias e = nvim
+alias vimdiff = nvim -d
 source ~/.config/nushell/starship.nu
 source ~/.config/nushell/carapace.nu
