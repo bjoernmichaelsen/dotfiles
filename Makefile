@@ -15,6 +15,20 @@ all: nerdfonts-install nushell-install starship-install carapace-install neovim-
 	@echo "source ~/.config/nushell/carapace.nu"
 	@echo "EOF"
 
+gentoo: nerdfonts-install carapace-install $(if $(FNM_ENABLED),fnm-install)
+	@echo "Remaining manual steps:"
+	@echo "-----------------------"
+	@echo
+	@echo "To install neovim, starship and nushell, execute (possibly unmask before):"
+	@echo "emerge nushell neovim starship"
+	@echo
+	@echo "You might want to add the following lines to ~/.config/nushell/config.nu, as I dont dare:"
+	@echo "starship init nu > ~/.config/nushell/starship.nu"
+	@echo "cat <<EOF >> ~/.config/nushell/config.nu"
+	@echo "source ~/.config/nushell/starship.nu"
+	@echo "source ~/.config/nushell/carapace.nu"
+	@echo "EOF"
+
 define container-install
 $1-install: $1-build
 	cp workdir/$(strip $2) ~/.local/bin/
@@ -90,6 +104,6 @@ workdir:
 clean:
 	rm -rf workdir
 
-.PHONY: all nerdfonts-dl nerdfonts-install neovim-install clean
+.PHONY: all gentoo nerdfonts-dl nerdfonts-install neovim-install clean
 
 # vim: set noet filetype=make
