@@ -4,6 +4,11 @@ SHELL=sh
 
 all: nerdfonts-install nushell-install starship-install carapace-install neovim-install $(if $(FNM_ENABLED),fnm-install)
 	@echo "Remaining manual steps:"
+	@echo "-----------------------"
+	@echo
+	@echo "To install neovim, execute:"
+	@echo "sudo dpkg -i workdir/nvim-linux-64.deb"
+	@echo
 	@echo "You might want to add the following lines to ~/.config/nushell/config.nu, as I dont dare:"
 	@echo "cat <<EOF >> ~/.config/nushell/config.nu"
 	@echo "source ~/.config/nushell/starship.nu"
@@ -24,7 +29,7 @@ $(eval $(call container-install, nushell, nu,))
 $(eval $(call container-install, fnm, fnm,))
 
 neovim-install: neovim-build
-	sudo deb -i workdir/nvim-linux64.deb
+	#sudo deb -i workdir/nvim-linux64.deb
 
 nerdfonts-install: $(foreach n,$(NERDFONTS_NAMES),workdir/nerdfonts/$n.zip)
 	for n in $^; do unzip -u $$n -d ~/.local/share/fonts; done
@@ -81,3 +86,5 @@ clean:
 	rm -rf workdir
 
 .PHONY: all nerdfonts-dl nerdfonts-install neovim-install clean
+
+# vim: set noet filetype=make
