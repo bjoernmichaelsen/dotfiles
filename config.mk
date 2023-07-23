@@ -14,6 +14,11 @@ CARAPACE_REPO_URL:=https://github.com/rsteube/carapace-bin.git
 CARAPACE_TAG:=v0.25.1
 CARAPACE_BUILD_DEPS:=
 
+NEOVIM_ENABLED:=T
+NEOVIM_REPO_URL:=https://github.com/neovim/neovim
+NEOVIM_TAG:=v0.9.1
+NEOVIM_BUILD_DEPS:=build-essential file ninja-build gettext cmake unzip curl
+
 FNM_ENABLED:=T # fnm is only installed if this is nonempty
 FNM_REPO_URL:=https://github.com/Schniz/fnm.git
 FNM_TAG:=v1.35.0
