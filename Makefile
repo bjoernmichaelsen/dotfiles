@@ -1,6 +1,9 @@
-NERDFONTS_BASEURL=https://github.com/ryanoasis/nerd-fonts/releases/download/
-NERDFONTS_VERSION=v3.0.2
-NERDFONTS_NAMES=3270 Hack Monoid
+NERDFONTS_BASEURL:=https://github.com/ryanoasis/nerd-fonts/releases/download/
+NERDFONTS_VERSION:=v3.0.2
+NERDFONTS_NAMES:=3270 Hack Monoid
+
+# rust is mostly statically linked, but you want a Debian or Ubuntu base image with the same glibc of your target machine.
+RUST_BASE_IMAGE:=debian:bookworm
 
 all: nerdfonts-install nushell-install starship-install carapace-install
 	@echo "Remaining manual steps:"
@@ -28,7 +31,7 @@ nerdfonts-install: $(foreach n,$(NERDFONTS_NAMES),workdir/nerdfonts/$n.zip)
 
 define container-build
 $1-build:
-	podman build --tag $$@ $$@
+	podman build --tag $$@ $$@ --build-arg=RUST_BASE_IMAGE=$(RUST_BASE_IMAGE)
 	podman run --mount type=bind,source=workdir/,destination=/out $$@ cp $2 /out
 
 .PHONY: $1-build
