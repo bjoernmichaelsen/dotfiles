@@ -41,7 +41,7 @@ $(eval $(call container-build, nushell, nushell/target/release/nu))
 nerdfonts-dl: $(foreach n,$(NERDFONTS_NAMES),workdir/nerdfonts/$n.zip)
 
 workdir/nerdfonts/%: workdir
-	curl --proto '=https' --tlsv1.2 -Sf -L --remote-name --output-dir workdir/nerdfonts $(NERDFONTS_BASEURL)/$(NERDFONTS_VERSION)/$*
+	curl --proto '=https' --tlsv1.2 -Sf -L -o workdir/nerdfonts/$* $(NERDFONTS_BASEURL)/$(NERDFONTS_VERSION)/$*
 
 workdir:
 	mkdir $@

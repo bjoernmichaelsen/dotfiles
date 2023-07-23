@@ -8,7 +8,10 @@ autocompletion.
 Dependencies
 ------------
 
-podman for containerized local builds, a POSIX shell and GNU make.
+* podman for containerized local builds
+* curl 7.68 or later for downloads
+* a POSIX shell
+* and GNU make
 
 Installing
 ----------
