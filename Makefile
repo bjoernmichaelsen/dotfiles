@@ -38,36 +38,41 @@ nerdfonts-install: $(foreach n,$(NERDFONTS_NAMES),workdir/nerdfonts/$n.zip)
 define container-build
 $1-build:
 	podman build --tag $$@ $$@\
-		--build-arg=RUST_BASE_IMAGE="$(strip $(RUST_BASE_IMAGE))"\
-		--build-arg=TAG="$(strip $2)"\
-		--build-arg=REPO_URL="$(strip $3)"\
-	       	--build-arg=BUILD_DEPS="$(strip $4)"
-	podman run --mount type=bind,source=workdir/,destination=/out $$@ cp $5 /out
+		--build-arg=BASE_IMAGE="$(strip $2)"\
+		--build-arg=TAG="$(strip $3)"\
+		--build-arg=REPO_URL="$(strip $4)"\
+		--build-arg=BUILD_DEPS="$(strip $5)"
+	podman run --mount type=bind,source=workdir/,destination=/out $$@ cp $6 /out
 
 .PHONY: $1-build
 endef
 
 $(eval $(call container-build, carapace,\
+	$(GOLANG_BASE_IMAGE),\
 	$(CARAPACE_TAG),\
 	$(CARAPACE_REPO_URL),\
 	$(CARAPACE_BUILD_DEPS),\
 	build/cmd/carapace/carapace))
 $(eval $(call container-build, starship,\
+	$(RUST_BASE_IMAGE),\
 	$(STARSHIP_TAG),\
 	$(STARSHIP_REPO_URL),\
 	$(STARSHIP_BUILD_DEPS),\
 	build/target/release/starship))
 $(eval $(call container-build, nushell,\
+	$(RUST_BASE_IMAGE),\
 	$(NUSHELL_TAG),\
 	$(NUSHELL_REPO_URL),\
 	$(NUSHELL_BUILD_DEPS),\
 	build/target/release/nu))
 $(eval $(call container-build, neovim,\
+	$(C_BASE_IMAGE),\
 	$(NEOVIM_TAG),\
 	$(NEOVIM_REPO_URL),\
 	$(NEOVIM_BUILD_DEPS),\
 	build/build/nvim-linux64.deb))
 $(eval $(call container-build, fnm,\
+	$(RUST_BASE_IMAGE),\
 	$(FNM_TAG),\
 	$(FNM_REPO_URL),\
 	$(FNM_BUILD_DEPS),\

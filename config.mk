@@ -26,4 +26,7 @@ FNM_BUILD_DEPS:=build-essential
 
 # rust is mostly statically linked, but you want a Debian or Ubuntu base image with the same glibc of your target machine.
 RUST_BASE_IMAGE:=debian:bookworm
+# golang is mostly statically linked, but you want a Debian or Ubuntu base image with the same glibc of your target machine.
+GOLANG_BASE_IMAGE:=docker.io/golang:1.20.6-bookworm
 
+C_BASE_IMAGE:=debian:bookworm

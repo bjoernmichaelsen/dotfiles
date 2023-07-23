@@ -1,4 +1,5 @@
-FROM docker.io/golang:1.20.6-bookworm
+ARG BASE_IMAGE
+FROM $BASE_IMAGE
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 ARG TAG
