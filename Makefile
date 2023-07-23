@@ -5,6 +5,10 @@ NERDFONTS_NAMES:=3270 Hack Monoid
 # rust is mostly statically linked, but you want a Debian or Ubuntu base image with the same glibc of your target machine.
 RUST_BASE_IMAGE:=debian:bookworm
 
+STARSHIP_REPO_URL:=https://github.com/nushell/nushell
+STARSHIP_TAG:=0.82.2
+STARSHIP_BUILD_DEPS:=build-essential openssl pkg-config libssl-dev
+
 STARSHIP_REPO_URL:=https://github.com/starship/starship
 STARSHIP_TAG:=v1.15.0
 STARSHIP_BUILD_DEPS:=build-essential cmake
@@ -53,7 +57,11 @@ $(eval $(call container-build, starship,\
 	$(STARSHIP_REPO_URL),\
 	$(STARSHIP_BUILD_DEPS),\
 	build/target/release/starship))
-$(eval $(call container-build, nushell, nushell/target/release/nu))
+$(eval $(call container-build, nushell,\
+	$(NUSHELL_TAG),\
+	$(NUSHELL_REPO_URL),\
+	$(NUSHELL_BUILD_DEPS),\
+	build/target/release/nu))
 
 nerdfonts-dl: $(foreach n,$(NERDFONTS_NAMES),workdir/nerdfonts/$n.zip)
 
