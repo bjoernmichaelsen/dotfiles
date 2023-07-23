@@ -2,7 +2,7 @@ include ./config.mk
 
 SHELL=sh
 
-all: nerdfonts-install nushell-install starship-install carapace-install
+all: nerdfonts-install nushell-install starship-install carapace-install $(if $(FNM_ENABLED),fnm-install)
 	@echo "Remaining manual steps:"
 	@echo "You might want to add the following lines to ~/.config/nushell/config.nu, as I dont dare:"
 	@echo "cat <<EOF >> ~/.config/nushell/config.nu"
@@ -21,6 +21,7 @@ endef
 $(eval $(call container-install, carapace, carapace, carapace _carapace nushell > ~/.config/nushell/carapace.nu))
 $(eval $(call container-install, starship, starship, ~/.local/bin/starship init nu > ~/.config/nushell/starship.nu))
 $(eval $(call container-install, nushell, nu,))
+$(eval $(call container-install, fnm, fnm,))
 
 nerdfonts-install: $(foreach n,$(NERDFONTS_NAMES),workdir/nerdfonts/$n.zip)
 	for n in $^; do unzip -u $$n -d ~/.local/share/fonts; done
@@ -53,6 +54,11 @@ $(eval $(call container-build, nushell,\
 	$(NUSHELL_REPO_URL),\
 	$(NUSHELL_BUILD_DEPS),\
 	build/target/release/nu))
+$(eval $(call container-build, fnm,\
+	$(FNM_TAG),\
+	$(FNM_REPO_URL),\
+	$(FNM_BUILD_DEPS),\
+	build/target/release/fnm))
 
 nerdfonts-dl: $(foreach n,$(NERDFONTS_NAMES),workdir/nerdfonts/$n.zip)
 

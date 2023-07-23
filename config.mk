@@ -14,6 +14,11 @@ CARAPACE_REPO_URL:=https://github.com/rsteube/carapace-bin.git
 CARAPACE_TAG:=v0.25.1
 CARAPACE_BUILD_DEPS:=
 
+FNM_ENABLED:=T # fnm is only installed if this is nonempty
+FNM_REPO_URL:=https://github.com/Schniz/fnm.git
+FNM_TAG:=v1.35.0
+FNM_BUILD_DEPS:=build-essential
+
 # rust is mostly statically linked, but you want a Debian or Ubuntu base image with the same glibc of your target machine.
 RUST_BASE_IMAGE:=debian:bookworm
 
