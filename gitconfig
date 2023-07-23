@@ -1,0 +1,5 @@
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+	unstage = reset HEAD --
