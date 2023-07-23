@@ -55,8 +55,8 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#394260"
-format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+style = "fg:#769ff0 bg:#394260"
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
 style = "fg:#769ff0 bg:#394260"
@@ -68,38 +68,51 @@ format = '\([$state ($progress_current/$progress_total)]($style)\)'
 
 [nodejs]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version) ]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version) ]($style)'
 
 [gradle]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version) ]($style)'
+recursive = true
 
 [python]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version) ]($style)'
 
 [terraform]
 symbol = "󱁢"
-style = "bg:#212736"
-format = '[[ $symbol ($version$workspace) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version$workspace) ]($style)'
 
 [package]
 symbol = "󰏖"
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version) ]($style)'
+
+[kubernetes]
+disabled = false
+style = "fg:#a0a9cb bg:#1d2230"
+symbol = "󱃾"
+format = '[ $symbol $context(\($namespace\))]($style)'
+
+[gcloud]
+disabled = false
+style = "fg:#a0a9cb bg:#1d2230"
+symbol = ""
+format = '[ $symbol ($project)\($region\)]($style)'
 
 [time]
 disabled = false
