@@ -5,6 +5,12 @@ NERDFONTS_NAMES:=3270 Hack Monoid
 # rust is mostly statically linked, but you want a Debian or Ubuntu base image with the same glibc of your target machine.
 RUST_BASE_IMAGE:=debian:bookworm
 
+STARSHIP_REPO_URL:=https://github.com/starship/starship
+STARSHIP_TAG:=v1.15.0
+STARSHIP_BUILD_DEPS:=build-essential cmake
+
+SHELL=sh
+
 all: nerdfonts-install nushell-install starship-install carapace-install
 	@echo "Remaining manual steps:"
 	@echo "You might want to add the following lines to ~/.config/nushell/config.nu, as I dont dare:"
@@ -31,14 +37,22 @@ nerdfonts-install: $(foreach n,$(NERDFONTS_NAMES),workdir/nerdfonts/$n.zip)
 
 define container-build
 $1-build:
-	podman build --tag $$@ $$@ --build-arg=RUST_BASE_IMAGE=$(RUST_BASE_IMAGE)
-	podman run --mount type=bind,source=workdir/,destination=/out $$@ cp $2 /out
+	podman build --tag $$@ $$@\
+		--build-arg=RUST_BASE_IMAGE="$(strip $(RUST_BASE_IMAGE))"\
+		--build-arg=TAG="$(strip $2)"\
+		--build-arg=REPO_URL="$(strip $3)"\
+	       	--build-arg=BUILD_DEPS="$(strip $4)"
+	podman run --mount type=bind,source=workdir/,destination=/out $$@ cp $5 /out
 
 .PHONY: $1-build
 endef
 
 $(eval $(call container-build, carapace, carapace-bin/cmd/carapace/carapace))
-$(eval $(call container-build, starship, starship/target/release/starship))
+$(eval $(call container-build, starship,\
+	$(STARSHIP_TAG),\
+	$(STARSHIP_REPO_URL),\
+	$(STARSHIP_BUILD_DEPS),\
+	build/target/release/starship))
 $(eval $(call container-build, nushell, nushell/target/release/nu))
 
 nerdfonts-dl: $(foreach n,$(NERDFONTS_NAMES),workdir/nerdfonts/$n.zip)
