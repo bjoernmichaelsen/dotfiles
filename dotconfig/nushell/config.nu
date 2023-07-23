@@ -47,7 +47,7 @@ let dark_theme = {
     nothing: white
     binary: white
     cellpath: white
-    row_index: green_bold
+    row_index: { fg: "#769ff0" attr: b }
     record: white
     list: white
     block: white
@@ -57,35 +57,35 @@ let dark_theme = {
     shape_and: purple_bold
     shape_binary: purple_bold
     shape_block: blue_bold
-    shape_bool: light_cyan
-    shape_closure: green_bold
-    shape_custom: green
-    shape_datetime: cyan_bold
-    shape_directory: cyan
-    shape_external: cyan
-    shape_externalarg: green_bold
-    shape_filepath: cyan
+    shape_bool: { fg:"#ffffff" }
+    shape_closure: { fg: "#769ff0" attr: b }
+    shape_custom: { fg: "#769ff0" }
+    shape_datetime: { fg:"#a3aed2" attr: b }
+    shape_directory: { fg:"#a3aed2" }
+    shape_external: { fg:"#a3aed2" }
+    shape_externalarg: { fg: "#769ff0" attr: b }
+    shape_filepath: { fg:"#a3aed2" }
     shape_flag: blue_bold
     shape_float: purple_bold
     # shapes are used to change the cli syntax highlighting
-    shape_garbage: { fg: white bg: red attr: b}
-    shape_globpattern: cyan_bold
+    shape_garbage: { fg: { fg:"#a3aed2" } bg: red attr: b}
+    shape_globpattern: { fg:"#a3aed2" attr: b }
     shape_int: purple_bold
-    shape_internalcall: cyan_bold
-    shape_list: cyan_bold
+    shape_internalcall: { fg:"#a3aed2" attr: b }
+    shape_list: { fg:"#a3aed2" attr: b }
     shape_literal: blue
-    shape_match_pattern: green
+    shape_match_pattern: { fg: "#769ff0" }
     shape_matching_brackets: { attr: u }
-    shape_nothing: light_cyan
+    shape_nothing: { fg:"#ffffff" }
     shape_operator: yellow
     shape_or: purple_bold
     shape_pipe: purple_bold
     shape_range: yellow_bold
-    shape_record: cyan_bold
+    shape_record: { fg:"#a3aed2" attr: b }
     shape_redirection: purple_bold
-    shape_signature: green_bold
-    shape_string: green
-    shape_string_interpolation: cyan_bold
+    shape_signature: { fg: "#769ff0" attr: b }
+    shape_string: { fg: "#769ff0"  }
+    shape_string_interpolation: { fg:"#a3aed2" attr: b }
     shape_table: blue_bold
     shape_variable: purple
     shape_vardecl: purple
@@ -343,9 +343,9 @@ let-env config = {
             col_padding: 2
         }
         style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
+            text:  { fg: "#769ff0" }
+            selected_text: { fg: "#000000" bg: "#769ff0" }
+            description_text: green
         }
       }
       {
@@ -357,9 +357,9 @@ let-env config = {
             page_size: 10
         }
         style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
+            text:  { fg: "#769ff0" }
+            selected_text: { fg: "#000000" bg: "#769ff0" }
+            description_text: green
         }
       }
       {
@@ -394,9 +394,9 @@ let-env config = {
             col_padding: 2
         }
         style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
+            text:  { fg: "#769ff0" }
+            selected_text: { fg: "#000000" bg: "#769ff0" }
+            description_text: green
         }
         source: { |buffer, position|
             scope commands
@@ -413,9 +413,9 @@ let-env config = {
             page_size: 10
         }
         style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
+            text:  { fg: "#769ff0" }
+            selected_text: { fg: "#000000" bg: "#769ff0" }
+            description_text: green
         }
         source: { |buffer, position|
             scope variables
@@ -437,9 +437,9 @@ let-env config = {
             description_rows: 10
         }
         style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
+            text:  { fg: "#769ff0" }
+            selected_text: { fg: "#000000" bg: "#769ff0" }
+            description_text: green
         }
         source: { |buffer, position|
             scope commands
