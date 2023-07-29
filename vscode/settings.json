@@ -1,0 +1,19 @@
+{
+    "workbench.colorTheme": "Tokyo Night",
+	"terminal.integrated.profiles.linux": {
+		"nu": {
+			"path": "nu"
+		},
+		"bash": {
+			"path": "bash",
+			"icon": "terminal-bash"
+		}
+	},
+	"terminal.integrated.defaultProfile.linux": "nu",
+	"editor.fontFamily": "'Monoid Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace",
+	"terminal.integrated.fontFamily": "Monoid Nerd Font Mono",
+	"gitlens.gitCommands.skipConfirmations": [
+		"fetch:command",
+		"stash-push:command"
+	]
+}
