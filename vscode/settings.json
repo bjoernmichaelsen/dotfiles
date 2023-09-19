@@ -15,5 +15,6 @@
 	"gitlens.gitCommands.skipConfirmations": [
 		"fetch:command",
 		"stash-push:command"
-	]
+	],
+	"telemetry.telemetryLevel": "off"
 }
